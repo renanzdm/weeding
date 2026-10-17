@@ -620,11 +620,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
     return const Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
-          Icons.lock_outline_rounded,
-          size: 16,
-          color: Color(0xFF9D887B),
-        ),
+        Icon(Icons.lock_outline_rounded, size: 16, color: Color(0xFF9D887B)),
         SizedBox(width: 6),
         Text('Somente os noivos terão acesso', style: TextStyle(color: Color(0xFF9D887B), fontSize: 12)),
       ],
