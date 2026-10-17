@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
 
     steps:
       - name: Checkout
@@ -33,6 +34,9 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
         run: |
+          if ([string]::IsNullOrWhiteSpace($env:SUPABASE_URL) -or [string]::IsNullOrWhiteSpace($env:SUPABASE_PUBLISHABLE_KEY)) {
+            throw 'SUPABASE_URL ou SUPABASE_PUBLISHABLE_KEY não foi encontrado nos Secrets do ambiente github-pages.'
+          }
           New-Item -ItemType Directory -Force -Path assets | Out-Null
           @"
           SUPABASE_URL=$env:SUPABASE_URL

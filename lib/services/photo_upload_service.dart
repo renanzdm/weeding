@@ -15,9 +15,9 @@ class PhotoUploadService {
     required String contentType,
   }) async {
     if (!isConfigured) {
-      // Mantém a tela navegável antes das credenciais serem configuradas.
-      await Future<void>.delayed(const Duration(milliseconds: 650));
-      return;
+      throw StateError(
+        'Supabase não está configurado. Verifique os Secrets do deploy.',
+      );
     }
 
     final timestamp = DateTime.now().microsecondsSinceEpoch;
