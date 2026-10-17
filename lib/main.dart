@@ -332,8 +332,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Compartilhe suas fotos',
-              style: Theme.of(context).textTheme.titleLarge),
+          Text('Compartilhe suas fotos', style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 6),
           Text(
             'Pode enviar várias de uma vez. Não precisa criar conta.',
@@ -360,10 +359,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
             ),
           ),
           const SizedBox(height: 20),
-          if (_photos.isEmpty)
-            _buildEmptyUploader(isCompact)
-          else
-            _buildPhotoGrid(isCompact),
+          if (_photos.isEmpty) _buildEmptyUploader(isCompact) else _buildPhotoGrid(isCompact),
           const SizedBox(height: 24),
           if (_isUploading) _buildProgress(),
           if (_hasUploaded) _buildSuccess(),
@@ -377,8 +373,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
   Widget _buildEmptyUploader(bool isCompact) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-          vertical: isCompact ? 31 : 46, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: isCompact ? 31 : 46, horizontal: 20),
       decoration: BoxDecoration(
         color: const Color(0xFFFCF8F3),
         borderRadius: BorderRadius.circular(18),
@@ -393,8 +388,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
               color: Color(0xFFF0DFD3),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.photo_camera_back_outlined,
-                color: Color(0xFF9A5E48), size: 27),
+            child: const Icon(Icons.photo_camera_back_outlined, color: Color(0xFF9A5E48), size: 27),
           ),
           const SizedBox(height: 16),
           const Text(
@@ -470,8 +464,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
                           color: Color(0xCC2F2925),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.close_rounded,
-                            color: Colors.white, size: 15),
+                        child: const Icon(Icons.close_rounded, color: Colors.white, size: 15),
                       ),
                     ),
                   ),
@@ -556,14 +549,12 @@ class _MemoriesPageState extends State<MemoriesPage> {
             const SizedBox(
               width: 17,
               height: 17,
-              child: CircularProgressIndicator(
-                  strokeWidth: 2, color: Color(0xFFB96E54)),
+              child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFFB96E54)),
             ),
             const SizedBox(width: 10),
             Text(
               'Guardando suas memórias… ${(_uploadProgress * 100).round()}%',
-              style: const TextStyle(
-                  color: Color(0xFF6A574D), fontWeight: FontWeight.w600),
+              style: const TextStyle(color: Color(0xFF6A574D), fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -595,8 +586,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
           Expanded(
             child: Text(
               'Tudo certo! Obrigado por guardar esse momento com a gente.',
-              style: TextStyle(
-                  color: Color(0xFF4E704D), fontWeight: FontWeight.w600),
+              style: TextStyle(color: Color(0xFF4E704D), fontWeight: FontWeight.w600),
             ),
           ),
         ],
@@ -618,8 +608,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
           Expanded(
             child: Text(
               _errorMessage!,
-              style: const TextStyle(
-                  color: Color(0xFF92503F), fontWeight: FontWeight.w600),
+              style: const TextStyle(color: Color(0xFF92503F), fontWeight: FontWeight.w600),
             ),
           ),
         ],
@@ -631,10 +620,13 @@ class _MemoriesPageState extends State<MemoriesPage> {
     return const Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(Icons.lock_outline_rounded, size: 16, color: Color(0xFF9D887B)),
+        Icon(
+          Icons.lock_outline_rounded,
+          size: 16,
+          color: Color(0xFF9D887B),
+        ),
         SizedBox(width: 6),
-        Text('Somente os noivos terão acesso',
-            style: TextStyle(color: Color(0xFF9D887B), fontSize: 12)),
+        Text('Somente os noivos terão acesso', style: TextStyle(color: Color(0xFF9D887B), fontSize: 12)),
       ],
     );
   }
