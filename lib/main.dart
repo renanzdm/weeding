@@ -29,14 +29,14 @@ class CasamentoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const ink = Color(0xFF2F2925);
-    const terracotta = Color(0xFFB96E54);
+    const terracotta = Color(0xFFA6404D);
 
     return MaterialApp(
       title: 'Nossas memórias',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF8F4EE),
+        scaffoldBackgroundColor: const Color(0xFFF8F3EC),
         colorScheme: ColorScheme.fromSeed(
           seedColor: terracotta,
           brightness: Brightness.light,
@@ -104,7 +104,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
   }
 
   Future<void> _pickFromGallery() async {
-    final files = await _picker.pickMultiImage(imageQuality: 88);
+    final files = await _picker.pickMultiImage(imageQuality: 100);
     if (files.isEmpty) return;
 
     final drafts = <PhotoDraft>[];
@@ -123,7 +123,7 @@ class _MemoriesPageState extends State<MemoriesPage> {
   Future<void> _takePhoto() async {
     final file = await _picker.pickImage(
       source: ImageSource.camera,
-      imageQuality: 88,
+      imageQuality: 100,
     );
     if (file == null) return;
 
@@ -216,8 +216,10 @@ class _MemoriesPageState extends State<MemoriesPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildTopBar(isCompact),
-                      const SizedBox(height: 54),
-                      _buildHero(isCompact),
+                      const SizedBox(height: 28),
+                      _buildPhotoHero(isCompact),
+                      const SizedBox(height: 28),
+                      _buildStoryCard(isCompact),
                       const SizedBox(height: 34),
                       _buildContentCard(isCompact),
                       const SizedBox(height: 42),
@@ -230,6 +232,198 @@ class _MemoriesPageState extends State<MemoriesPage> {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildPhotoHero(bool isCompact) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(isCompact ? 24 : 32),
+      child: SizedBox(
+        height: isCompact ? 480 : 590,
+        width: double.infinity,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset(
+              'assets/casal-hero.png',
+              fit: BoxFit.cover,
+              alignment: Alignment.center,
+            ),
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0x12000000),
+                    Color(0x1A000000),
+                    Color(0xD92A1E20),
+                  ],
+                  stops: [0, 0.42, 1],
+                ),
+              ),
+            ),
+            Positioned(
+              left: isCompact ? 22 : 42,
+              right: isCompact ? 22 : 42,
+              bottom: isCompact ? 24 : 38,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 13,
+                      vertical: 7,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xD9FFF8EF),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: const Text(
+                      'A NOSSA HISTÓRIA',
+                      style: TextStyle(
+                        color: Color(0xFFA6404D),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    'Começa com a gente.',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: isCompact ? 34 : 50,
+                      fontWeight: FontWeight.w400,
+                      height: 1.05,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'E continua em cada memória compartilhada por vocês.',
+                    style: TextStyle(
+                      color: Color(0xFFF9EDE4),
+                      fontSize: 15,
+                      height: 1.45,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: isCompact ? 18 : 26,
+              right: isCompact ? 18 : 28,
+              child: Container(
+                width: 48,
+                height: 48,
+                decoration: const BoxDecoration(
+                  color: Color(0xB3FFF8EF),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.favorite_rounded,
+                  color: Color(0xFFA6404D),
+                  size: 21,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStoryCard(bool isCompact) {
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(isCompact ? 18 : 22),
+      child: AspectRatio(
+        aspectRatio: isCompact ? 1.18 : 0.9,
+        child: Image.asset(
+          'assets/casal-roda-gigante.png',
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+        ),
+      ),
+    );
+
+    final copy = Padding(
+      padding: EdgeInsets.all(isCompact ? 4 : 28),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'UM DIA PARA GUARDAR',
+            style: TextStyle(
+              color: Color(0xFFA6404D),
+              fontSize: 10,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 1.6,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Cada registro deixa tudo ainda mais nosso.',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: isCompact ? 25 : 30,
+                  height: 1.12,
+                ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'A gente quer reviver esse dia pelos olhos de quem esteve perto. Compartilhe aquela foto espontânea, engraçada ou inesquecível.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 14,
+                  height: 1.55,
+                ),
+          ),
+          const SizedBox(height: 18),
+          const Row(
+            children: [
+              Icon(Icons.favorite_border_rounded,
+                  color: Color(0xFFA6404D), size: 18),
+              SizedBox(width: 8),
+              Text(
+                'feito de momentos reais',
+                style: TextStyle(
+                  color: Color(0xFF8D756C),
+                  fontSize: 12,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    return Container(
+      padding: EdgeInsets.all(isCompact ? 16 : 18),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFCF8),
+        borderRadius: BorderRadius.circular(isCompact ? 24 : 28),
+        border: Border.all(color: const Color(0xFFEADFD5)),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0B6D5548),
+            blurRadius: 24,
+            offset: Offset(0, 12),
+          ),
+        ],
+      ),
+      child: isCompact
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [image, const SizedBox(height: 22), copy],
+            )
+          : Row(
+              children: [
+                Expanded(flex: 5, child: image),
+                const SizedBox(width: 22),
+                Expanded(flex: 6, child: copy),
+              ],
+            ),
     );
   }
 
@@ -274,6 +468,8 @@ class _MemoriesPageState extends State<MemoriesPage> {
     );
   }
 
+  // Kept as a fallback reference for the previous text-only hero.
+  // ignore: unused_element
   Widget _buildHero(bool isCompact) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
